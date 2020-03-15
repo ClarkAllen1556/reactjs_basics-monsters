@@ -72,7 +72,6 @@ class App extends Component {
     super();
 
     this.state = {
-      string: 'This is test from state',
       people: []
     };
   }
@@ -80,7 +79,6 @@ class App extends Component {
   async componentDidMount() {
     const resp = await fetch('https://jsonplaceholder.typicode.com/users');
     let usrs = await resp.json();
-    console.log(usrs);
 
     this.setState({ people: usrs });
   }
@@ -88,15 +86,7 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <CardList name='billy'>
-          {
-            this.state.people.map(person => {
-              return (
-                <h1 key={person.id}> {person.name} </h1>
-              );
-            })
-          }
-        </CardList>
+        <CardList people={ this.state.people } />
       </div>
     )
   }
