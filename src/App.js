@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { CardList } from './components/card-list/card-list.component';
 
 // function App() {
 //   return (
@@ -73,33 +73,30 @@ class App extends Component {
 
     this.state = {
       string: 'This is test from state',
-      people: [
-        {
-          name: 'Bill',
-          id: '1'
-        },
-        {
-          name: 'Jim',
-          id: '2'
-        },
-        {
-          name: 'Jane',
-          id: '3'
-        }
-      ]
+      people: []
     };
+  }
+
+  async componentDidMount() {
+    const resp = await fetch('https://jsonplaceholder.typicode.com/users');
+    let usrs = await resp.json();
+    console.log(usrs);
+
+    this.setState({ people: usrs });
   }
 
   render() {
     return (
       <div className='App'>
-        {
-          this.state.people.map( person => {
-            return (
-              <h1 key={ person.id }> {person.name} </h1>
-            );
-          })
-        }
+        <CardList name='billy'>
+          {
+            this.state.people.map(person => {
+              return (
+                <h1 key={person.id}> {person.name} </h1>
+              );
+            })
+          }
+        </CardList>
       </div>
     )
   }
