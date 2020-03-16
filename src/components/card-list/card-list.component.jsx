@@ -6,7 +6,6 @@ export const CardList = (props) => {
   return <div className='card-list'>
     {
       props.people.map(person => {
-        console.log(person)
         return (
           <Card key={person.id} person={person}/> // This is using the Card com
         );
