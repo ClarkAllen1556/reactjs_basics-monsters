@@ -76,6 +76,8 @@ class App extends Component {
       people: [],
       searchField: ''
     };
+
+    // this.changeHandler = this.changeHandler.bind(this);
   }
 
   async componentDidMount() {
@@ -83,6 +85,10 @@ class App extends Component {
     let usrs = await resp.json();
 
     this.setState({ people: usrs });
+  }
+
+  changeHandler = (e) => {
+    this.setState({ searchField: e.target.value });
   }
 
   render() {
@@ -95,7 +101,7 @@ class App extends Component {
       <div className='App'>
         <SearchBox
           placeholder='Search for Boyz'
-          changeHandler={ (e) => this.setState({ searchField: e.target.value })}
+          changeHandler={ this.changeHandler }
         />
         <CardList people={ filteredPeople } />
       </div>
